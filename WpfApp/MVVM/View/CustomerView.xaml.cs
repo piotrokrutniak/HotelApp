@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -29,14 +30,28 @@ namespace WpfApp.MVVM.View
             DataContext = new CustomerViewModel();
         }
 
-        private void EditButton_Click(object sender, RoutedEventArgs e)
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             // Get the selected Customer object from the ListBox
             var button = (Button)sender;
             var customer = (Customer)button.DataContext;
 
-            // Open the record edit form or perform other actions
-            // ...
+            // Create an instance of the UpdateView
+            CustomerUpdateView updateView = new CustomerUpdateView();
+
+            // Set the DataContext of the UpdateView to the selected Customer
+            updateView.DataContext = customer;
+
+            // Show the UpdateView as a popup window
+            Popup popup = new Popup
+            {
+                Child = updateView,
+                Width = updateView.Width,
+                Height = updateView.Height,
+                PlacementTarget = this,
+                Placement = PlacementMode.Center,
+                IsOpen = true
+            };
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
