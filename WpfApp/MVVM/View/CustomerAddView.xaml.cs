@@ -21,9 +21,9 @@ namespace WpfApp.MVVM.View
     /// <summary>
     /// Interaction logic for CustomerUpdateView.xaml
     /// </summary>
-    public partial class CustomerUpdateView : UserControl
+    public partial class CustomerAddView : UserControl
     {
-        public CustomerUpdateView()
+        public CustomerAddView()
         {
             InitializeComponent();
         }
@@ -38,21 +38,24 @@ namespace WpfApp.MVVM.View
             }
 
         }
-        private void Save(object sender, RoutedEventArgs e)
+        private void Add(object sender, RoutedEventArgs e)
         {
-            var customer = DataContext as Customer;
+            var firstName = FirstNameTextBox.Text;
+            var lastName = LastNameTextBox.Text;
+            var loyaltyCard = LoyaltyCardComboBox.SelectedItem as ComboBoxItem;
 
-            using (var dbContext = new ApplicationDbContext())
+            if (firstName != null && lastName != null && loyaltyCard != null)
             {
-                dbContext.Customers.Update(customer);
-                dbContext.SaveChanges();
+                var customer = new Customer(firstName, lastName);
+
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    dbContext.Customers.Add(customer);
+                    dbContext.SaveChanges();
+                }
+
+                Discard(sender, e);
             }
-
-            Discard(sender, e);
         }
-
-
-
-
     }
 }

@@ -30,6 +30,23 @@ namespace WpfApp.MVVM.View
             DataContext = new CustomerViewModel();
         }
 
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Create an instance of the UpdateView
+            CustomerAddView updateView = new CustomerAddView();
+
+            // Show the UpdateView as a popup window
+            Popup popup = new Popup
+            {
+                Child = updateView,
+                Width = updateView.Width,
+                Height = updateView.Height,
+                PlacementTarget = this,
+                Placement = PlacementMode.Center,
+                IsOpen = true
+            };
+        }
+
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             // Get the selected Customer object from the ListBox
@@ -64,8 +81,11 @@ namespace WpfApp.MVVM.View
 
             if (result == MessageBoxResult.Yes)
             {
-                // TODO: Delete the selected record from the database
-                // ...
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    dbContext.Customers.Remove(customer);
+                    dbContext.SaveChanges();
+                }
             }
         }
 

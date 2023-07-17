@@ -16,10 +16,20 @@
         <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
             <TextBlock Text="First Name" Width="200" Margin="0,0,10,0" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
             <TextBlock Text="Last Name" Width="200" Margin="0,0,10,0" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
-            <TextBlock Text="LoyaltyCard" Width="100" Margin="0,0,10,0" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
+            <TextBlock Text="Loyalty Card" Width="100" Margin="0,0,10,0" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
+            <Button Content="Add New"
+                    Click="AddButton_Click"
+                    Height="50"
+                    Foreground="White"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Background="#1A97DB"
+                    Margin="337,0,0,0"
+                    Style="{StaticResource CommonButtonTheme}"
+                    Command="{Binding HomeViewCommand}"/>
             <!-- Add more controls or bindings as needed -->
         </StackPanel>
-        <ScrollViewer Height="550" Width="auto" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+        <ScrollViewer Height="550" Width="auto" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="0,10">
             <ListBox ItemsSource="{Binding Customers}" BorderBrush="Transparent" Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -30,7 +40,7 @@
                                     <TextBlock Text="{Binding LastName}" FontSize="16" Width="200" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
                                     <TextBlock Text="{Binding LoyaltyCard}" FontSize="16" Width="100" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" Width="250"  Height="70" HorizontalAlignment="Right" Margin="220,0,0,0">
+                                <StackPanel Orientation="Horizontal" Width="210"  Height="70" HorizontalAlignment="Right" Margin="240,0,0,0">
                                     <Button Content="Update"
                                                  Click="UpdateButton_Click"
                                                  Height="50"
