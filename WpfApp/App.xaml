@@ -19,6 +19,12 @@
             <DataTemplate DataType="{x:Type viewModel:CustomerViewModel}">
                 <view:CustomerView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:RoomViewModel}">
+                <view:RoomView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:OrderViewModel}">
+                <view:OrderView/>
+            </DataTemplate>
             
             
         </ResourceDictionary>

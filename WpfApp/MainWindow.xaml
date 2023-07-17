@@ -35,7 +35,7 @@
                    FontSize="22"/>
 
             <StackPanel Grid.Row="1">
-                <RadioButton Content="Rooms"
+                <RadioButton Content="Room Availability"
                              Height="50"
                              Foreground="White"
                              VerticalAlignment="Center"
@@ -50,12 +50,20 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding CustomerViewCommand}"/>
+                <RadioButton Content="Rooms"
+                             Height="50"
+                             Foreground="White"
+                             VerticalAlignment="Center"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding RoomViewCommand}"/>
                 <RadioButton Content="Orders"
                              Height="50"
                              Foreground="White"
                              VerticalAlignment="Center"
                              FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding OrderViewCommand}"/>
 
             </StackPanel>
 

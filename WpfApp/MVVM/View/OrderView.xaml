@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="WpfApp.MVVM.View.OrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        
+        <StackPanel Orientation="Horizontal" Margin="25,0,0,0">
+            <TextBlock Text="Id" Width="50" Margin="0,0,10,0" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
+            <TextBlock Text="First Name" Width="150" Margin="0,0,10,0" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
+            <TextBlock Text="Last Name" Width="150" Margin="0,0,10,0" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
+            <TextBlock Text="Order Total" Width="100" Margin="0,0,10,0" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
+            <TextBlock Text="Created" Width="200" Margin="0,0,10,0" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
+            <Button Content="Add New"
+                    Click="AddButton_Click"
+                    Height="50"
+                    Foreground="White"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Background="#1A97DB"
+                    Margin="157,0,0,0"
+                    Style="{StaticResource CommonButtonTheme}"
+                    Command="{Binding HomeViewCommand}"/>
+            <!-- Add more controls or bindings as needed -->
+        </StackPanel>
+        <ScrollViewer Height="550" Width="auto" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="0,10">
+            <ListBox ItemsSource="{Binding Orders}" BorderBrush="Transparent" Background="Transparent">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="DarkGray" CornerRadius="10" Margin="0,5,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" Margin="20,0,0,0" Height="70">
+                                    <TextBlock Text="{Binding CustomerId}" FontSize="16" Width="50" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
+                                    <TextBlock Text="{Binding Customer.FirstName}" FontSize="16" Width="150" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
+                                    <TextBlock Text="{Binding Customer.LastName}" FontSize="16" Width="150" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
+                                    <TextBlock Text="{Binding Total}" FontSize="16" Width="100" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
+                                    <TextBlock Text="{Binding UpdatedDate}" FontSize="16" Width="200" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Width="210"  Height="70" HorizontalAlignment="Right" Margin="70,0,0,0">
+                                    <Button Content="Update"
+                                                 Click="UpdateButton_Click"
+                                                 Height="50"
+                                                 Foreground="White"
+                                                 VerticalAlignment="Center"
+                                                 FontSize="16"
+                                                 Background="#1A97DB"
+                                                 Margin="0,0,10,0"
+                                                 Style="{StaticResource CommonButtonTheme}"
+                                                 Command="{Binding HomeViewCommand}"/>
+                                    <Button Content="Delete"
+                                                 Click="DeleteButton_Click"
+                                                 Height="50"
+                                                 Foreground="White"
+                                                 VerticalAlignment="Center"
+                                                 FontSize="16"
+                                                 Background="#B20D30"
+                                                 Style="{StaticResource CommonButtonTheme}"
+                                                 Command="{Binding HomeViewCommand}"/>
+                                </StackPanel>
+                                <!-- Add more controls or bindings as needed -->
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

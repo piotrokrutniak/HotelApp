@@ -10,9 +10,16 @@ namespace WpfApp.MVVM.ViewModel
 {
     public class MainViewModel : ObservableObject
     {
-        private object _currentView;
+        public RelayCommand HomeViewCommand { get; set; }
+        public RelayCommand CustomerViewCommand { get; set; }
+        public RelayCommand RoomViewCommand { get; set; }
+        public RelayCommand OrderViewCommand { get; set; }
         public HomeViewModel HomeVM { get; set; }
         public CustomerViewModel CustomerVM { get; set; }
+        public RoomViewModel RoomVM { get; set; }
+        public OrderViewModel OrderVM { get; set; }
+
+        private object _currentView;
         public object CurrentView
         {
             get { return _currentView; }
@@ -27,6 +34,9 @@ namespace WpfApp.MVVM.ViewModel
         {
             HomeVM = new HomeViewModel();
             CustomerVM = new CustomerViewModel();
+            RoomVM = new RoomViewModel();
+            OrderVM = new OrderViewModel();
+
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(x =>
@@ -34,14 +44,25 @@ namespace WpfApp.MVVM.ViewModel
                 CurrentView = HomeVM;
             });
 
+            RoomViewCommand = new RelayCommand(x =>
+            {
+                CurrentView = RoomVM;
+            });
+
             CustomerViewCommand = new RelayCommand(x =>
             {
                 CurrentView = CustomerVM;
             });
 
+            OrderViewCommand = new RelayCommand(x =>
+            {
+                CurrentView = OrderVM;
+            });
+
+
+
         }
 
-        public RelayCommand HomeViewCommand { get; set; }
-        public RelayCommand CustomerViewCommand { get; set; }
+        
     }
 }

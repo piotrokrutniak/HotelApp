@@ -24,7 +24,6 @@ namespace WpfApp
         public MainWindow()
         {
             InitializeComponent();
-            //this.DataContext = new ApplicationDbContext();
         }
     }
 }

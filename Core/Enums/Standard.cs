@@ -10,6 +10,6 @@ namespace Core.Enums
     {
         public const string Basic = "Basic";
         public const string Gold = "Gold";
-        public const string Premium = "Basic";
+        public const string Premium = "Premium";
     }
 }
