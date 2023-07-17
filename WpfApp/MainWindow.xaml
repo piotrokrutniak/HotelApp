@@ -7,10 +7,10 @@
         xmlns:viewModel="clr-namespace:WpfApp.MVVM.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280"
-        WindowStyle="None"
+        WindowStyle="ToolWindow"
         ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="False">
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
