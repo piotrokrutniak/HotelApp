@@ -53,7 +53,7 @@ namespace WpfApp.MVVM.View
         {
             // Get the selected Order object from the ListBox
             var button = (Button)sender;
-            var Order = (Order)button.DataContext;
+            var order = (Order)button.DataContext;
             var bookings = new ObservableCollection<Booking>();
 
             using (var context = new ApplicationDbContext())
@@ -62,10 +62,10 @@ namespace WpfApp.MVVM.View
             }
 
             // Create an instance of the UpdateView
-            OrderUpdateView updateView = new OrderUpdateView(bookings.ToList());
+            OrderUpdateView updateView = new OrderUpdateView(bookings.ToList(), order);
 
             // Set the DataContext of the UpdateView to the selected Order
-            updateView.DataContext = Order;
+            updateView.DataContext = order;
 
             // Show the UpdateView as a popup window
             Popup popup = new Popup

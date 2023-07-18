@@ -25,10 +25,15 @@ namespace WpfApp.MVVM.View
     public partial class OrderUpdateView : UserControl
     {
         List<Booking> Bookings;
-        public OrderUpdateView(List<Booking> bookings)
+        public int OrderId { get; set; }
+        public int CustomerId { get; set; }
+        public OrderUpdateView(List<Booking> bookings, Order order)
         {
             InitializeComponent();
             Bookings = bookings;
+
+            OrderId = order.Id;
+            CustomerId = order.CustomerId;
         }
 
         private void Discard(object sender, RoutedEventArgs e)
@@ -44,8 +49,8 @@ namespace WpfApp.MVVM.View
         private void Save(object sender, RoutedEventArgs e)
         {
             var order = DataContext as Order;
-            order.Total = order.Bookings.Sum(x => x.Room.Price);
-            
+            order.Total = order.Bookings.Sum(x => x.Room.Price * Convert.ToInt32(Math.Ceiling((x.CheckOut - x.CheckIn).TotalDays)));
+
             using (var dbContext = new ApplicationDbContext())
             {
                 dbContext.Orders.Update(order);
@@ -58,7 +63,7 @@ namespace WpfApp.MVVM.View
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             // Create an instance of the UpdateView
-            BookingAddView updateView = new BookingAddView();
+            BookingAddView updateView = new BookingAddView(OrderId, CustomerId);
 
             // Show the UpdateView as a popup window
             Popup popup = new Popup

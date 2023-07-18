@@ -40,9 +40,9 @@
             </Border>
             <TextBlock FontSize="22" Width="400" Margin="0,20,0,10" Background="Transparent" Text="Cost Per Day" Foreground="White"/>
             <Border BorderThickness="1" BorderBrush="#1C1D1F">
-                <TextBlock FontSize="22" Width="400"  Padding="10" Background="#24262C" Foreground="White" Cursor="No">
-                             <Run Text="{Binding SelectedItem.Cost, ElementName=ComboBoxStandard}" />
-                             <Run Text="zł" /> <!-- space -->
+                <TextBlock FontSize="22" Width="400" Padding="10" Background="#24262C" Foreground="White" Cursor="No">
+                    <Run Text="{Binding SelectedRoomCost}" />
+                    <Run Text="zł" /> <!-- space -->
                 </TextBlock>
             </Border>
             <TextBlock FontSize="22" Width="400" Margin="0,20,0,10" Background="Transparent" Text="Room Number" Foreground="White"/>

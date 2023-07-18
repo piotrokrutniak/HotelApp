@@ -5,6 +5,7 @@ using Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,21 @@ namespace WpfApp.MVVM.View
     public partial class BookingAddView : UserControl
     {
         public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
-        public BookingAddView()
+
+        private string _selectedRoomCost;
+        private int _orderId { get; set; }
+        private int _customerId { get; set; }
+
+        public string SelectedRoomCost
+        {
+            get { return _selectedRoomCost; }
+            set
+            {
+                _selectedRoomCost = value;
+                OnPropertyChanged(nameof(SelectedRoomCost));
+            }
+        }
+        public BookingAddView(int orderId, int customerId)
         {
             InitializeComponent();
 
@@ -36,6 +51,8 @@ namespace WpfApp.MVVM.View
                 Rooms = new ObservableCollection<Room>(dbContext.Rooms.ToList());
             }
 
+            _orderId = orderId;
+            _customerId = customerId;
             DataContext = this;
         }
 
@@ -53,9 +70,10 @@ namespace WpfApp.MVVM.View
         {
             Booking booking = new()
             {
+                OrderId = _orderId,
+                CustomerId = _customerId,
                 CheckIn = DateTime.Parse(CheckInTextBox.Text),
                 CheckOut = DateTime.Parse(CheckOutTextBox.Text),
-                Days = 0,
                 RoomId = int.Parse(ComboBoxStandard.SelectedValue.ToString())
             };
 
@@ -63,22 +81,32 @@ namespace WpfApp.MVVM.View
             {
                 using (var dbContext = new ApplicationDbContext())
                 {
-                    //dbContext.Bookings.Add(booking);
-                    //dbContext.SaveChanges();
+                    dbContext.Bookings.Add(booking);
+                    dbContext.SaveChanges();
                 }
 
-                //Discard(sender, e);
+                Discard(sender, e);
             }
         }
 
         private bool ValidateBooking(Booking booking)
         {
-            bool checkIn = (booking.CheckIn - booking.CheckOut).TotalDays < 365;
+            double span = (booking.CheckOut - booking.CheckIn).TotalDays;
 
-            bool checkOut = (booking.CheckIn - booking.CheckOut).TotalDays >= 1;
+
+            bool checkIn = span < 365;
+
+            bool checkOut = span >= 1;
 
 
             return checkIn && checkOut;
         }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
