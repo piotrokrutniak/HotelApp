@@ -41,7 +41,7 @@ namespace WpfApp.MVVM.View
         private void Save(object sender, RoutedEventArgs e)
         {
             var room = DataContext as Room;
-            room.Standard = ComboBoxStandard.Text;
+            room.Standard = ComboBoxStandard.SelectionBoxItem.ToString();
 
             using (var dbContext = new ApplicationDbContext())
             {

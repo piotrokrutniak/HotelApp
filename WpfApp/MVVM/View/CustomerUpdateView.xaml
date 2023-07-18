@@ -27,7 +27,7 @@
             <Setter Property="CornerRadius" Value="20"/>
         </Style>
     </UserControl.Resources>
-    <Grid Background="#383640">
+    <Grid Background="#1D1C21">
         <StackPanel Margin="70">
             <TextBlock FontSize="36" Width="400" Margin="0,20,0,10" Background="Transparent" Text="Update Customer" Foreground="White"/>
             <TextBlock FontSize="22" Width="400" Margin="0,20,0,10" Background="Transparent" Text="First Name" Foreground="White"/>

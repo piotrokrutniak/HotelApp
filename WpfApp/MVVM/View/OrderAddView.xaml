@@ -19,7 +19,7 @@
             <Setter Property="FontSize" Value="22"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Width" Value="400"/>
-            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="Background" Value="#24262C"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="Gray"/>
         </Style>
@@ -27,39 +27,34 @@
             <Setter Property="CornerRadius" Value="20"/>
         </Style>
     </UserControl.Resources>
-    <Grid Background="#383640">
+    <Grid Background="#1D1C21">
         <StackPanel Margin="70">
             <TextBlock FontSize="36" Width="400" Margin="0,0,0,10" Background="Transparent" Text="Create Order" Foreground="White"/>
             <TextBlock FontSize="22" Width="400" Margin="0,20,0,10" Background="Transparent" Text="Booking Guest" Foreground="White"/>
-            <Border>
-                <ComboBox x:Name="ComboBoxStandard" SelectedItem="{Binding CustomerId}">
-                    <ComboBox.Style>
-                        <Style TargetType="ComboBox">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding CustomerId}" Value="1">
-                                    <Setter Property="SelectedIndex" Value="0" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding CustomerId}" Value="2">
-                                    <Setter Property="SelectedIndex" Value="1" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding CustomerId}" Value="3">
-                                    <Setter Property="SelectedIndex" Value="2" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                            <Setter Property="FontSize" Value="22"/>
-                            <Setter Property="Padding" Value="10"/>
-                            <Setter Property="Width" Value="400"/>
-                            <Setter Property="Background" Value="AliceBlue"/>
-                            <Setter Property="BorderThickness" Value="1"/>
-                            <Setter Property="BorderBrush" Value="Gray"/>
-                        </Style>
-                    </ComboBox.Style>
-                    <ComboBoxItem Content="Basic"/>
-                    <ComboBoxItem Content="Gold"/>
-                    <ComboBoxItem Content="Premium"/>
-                </ComboBox>
-
-            </Border>
+            <ComboBox x:Name="ComboBoxStandard" 
+                      SelectedValue="{Binding CustomerId, Mode=TwoWay}"
+                      SelectedValuePath="Id"
+                      FontSize="22"
+                      Padding="10"
+                      Width="400"
+                      Background="#24262C"
+                      BorderThickness="1"
+                      BorderBrush="Gray">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                             <Run Text="{Binding FirstName}" />
+                             <Run Text="" />
+                             <Run Text="{Binding LastName}" />
+                             <Run Text=" ID:" />
+                             <Run Text="{Binding Id}" />
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+                <ComboBox.ItemsSource>
+                    <Binding Path="Customers"/>
+                </ComboBox.ItemsSource>
+            </ComboBox>
 
             <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
                 <Button Content="Add"

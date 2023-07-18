@@ -13,6 +13,8 @@ namespace Core.Models
             RoomId = roomId;
             Days = days;
         }
+        public Booking() { }
+
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
 

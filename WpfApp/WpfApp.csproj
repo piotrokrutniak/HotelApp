@@ -29,6 +29,9 @@
     <Compile Update="MVVM\View\OrderUpdateView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MVVM\View\BookingAddView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MVVM\View\RoomView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

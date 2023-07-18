@@ -22,18 +22,18 @@ using System.Windows.Shapes;
 namespace WpfApp.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for OrderUpdateView.xaml
+    /// Interaction logic for BookingUpdateView.xaml
     /// </summary>
-    public partial class OrderAddView : UserControl
+    public partial class BookingAddView : UserControl
     {
-        public ObservableCollection<Customer> Customers { get; set; } = new ObservableCollection<Customer>();
-        public OrderAddView()
+        public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
+        public BookingAddView()
         {
             InitializeComponent();
 
             using (var dbContext = new ApplicationDbContext())
             {
-                Customers = new ObservableCollection<Customer>(dbContext.Customers.ToList());
+                Rooms = new ObservableCollection<Room>(dbContext.Rooms.ToList());
             }
 
             DataContext = this;
@@ -41,7 +41,7 @@ namespace WpfApp.MVVM.View
 
         private void Discard(object sender, RoutedEventArgs e)
         {
-            // Close the OrderUpdateView popup
+            // Close the BookingUpdateView popup
             var popup = this.Parent as Popup;
             if (popup != null)
             {
@@ -51,29 +51,34 @@ namespace WpfApp.MVVM.View
         }
         private void Add(object sender, RoutedEventArgs e)
         {
-            Order Order = new()
+            Booking booking = new()
             {
-                CustomerId = int.Parse(ComboBoxStandard.SelectedValue.ToString()),
-                Total = 0.00m
+                CheckIn = DateTime.Parse(CheckInTextBox.Text),
+                CheckOut = DateTime.Parse(CheckOutTextBox.Text),
+                Days = 0,
+                RoomId = int.Parse(ComboBoxStandard.SelectedValue.ToString())
             };
 
-            if (ValidateOrder(Order))
+            if (ValidateBooking(booking))
             {
                 using (var dbContext = new ApplicationDbContext())
                 {
-                    dbContext.Orders.Add(Order);
-                    dbContext.SaveChanges();
+                    //dbContext.Bookings.Add(booking);
+                    //dbContext.SaveChanges();
                 }
 
-                Discard(sender, e);
+                //Discard(sender, e);
             }
         }
 
-        private bool ValidateOrder(Order Order)
+        private bool ValidateBooking(Booking booking)
         {
-            bool customerId = Order.CustomerId > 0;
-            
-            return customerId;
+            bool checkIn = (booking.CheckIn - booking.CheckOut).TotalDays < 365;
+
+            bool checkOut = (booking.CheckIn - booking.CheckOut).TotalDays >= 1;
+
+
+            return checkIn && checkOut;
         }
     }
 }

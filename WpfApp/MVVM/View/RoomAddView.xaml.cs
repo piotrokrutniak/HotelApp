@@ -47,8 +47,8 @@ namespace WpfApp.MVVM.View
                 RoomNumber = int.Parse(RoomNumberTextBox.Text),
                 Floor = int.Parse(FloorTextBox.Text),
                 Price = decimal.Parse(PriceTextBox.Text),
-                Standard = ComboBoxStandard.Text
-            };
+                Standard = ComboBoxStandard.SelectionBoxItem.ToString()
+        };
 
             if (ValidateRoom(room))
             {

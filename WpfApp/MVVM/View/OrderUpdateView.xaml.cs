@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp.MVVM.ViewModel;
 
 namespace WpfApp.MVVM.View
 {
@@ -24,7 +25,6 @@ namespace WpfApp.MVVM.View
     public partial class OrderUpdateView : UserControl
     {
         List<Booking> Bookings;
-        string CombinedName;
         public OrderUpdateView(List<Booking> bookings)
         {
             InitializeComponent();
@@ -51,14 +51,14 @@ namespace WpfApp.MVVM.View
                 dbContext.Orders.Update(order);
                 dbContext.SaveChanges();
             }
-            
+
             Discard(sender, e);
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             // Create an instance of the UpdateView
-            CustomerAddView updateView = new CustomerAddView();
+            BookingAddView updateView = new BookingAddView();
 
             // Show the UpdateView as a popup window
             Popup popup = new Popup
