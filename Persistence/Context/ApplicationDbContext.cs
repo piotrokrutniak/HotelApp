@@ -18,7 +18,8 @@ namespace Persistence.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=HotelAppDb;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=30;");
+            //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=HotelAppDb;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=30;");
+            optionsBuilder.UseInMemoryDatabase("HotelAppDb");
         }
 
         public override int SaveChanges()
