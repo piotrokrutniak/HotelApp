@@ -24,18 +24,24 @@ namespace WpfApp.MVVM.View
     /// </summary>
     public partial class RoomView : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RoomView"/> class.
+        /// </summary>
         public RoomView()
         {
             InitializeComponent();
             DataContext = new RoomViewModel();
         }
 
+        /// <summary>
+        /// Creates an instance of the RoomAddView and shows it as a popup window.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            // Create an instance of the UpdateView
             RoomAddView updateView = new RoomAddView();
 
-            // Show the UpdateView as a popup window
             Popup popup = new Popup
             {
                 Child = updateView,
@@ -47,19 +53,19 @@ namespace WpfApp.MVVM.View
             };
         }
 
+        /// <summary>
+        /// Creates an instance of the RoomUpdateView and shows it as a popup window.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            // Get the selected Room object from the ListBox
             var button = (Button)sender;
-            var Room = (Room)button.DataContext;
+            var room = (Room)button.DataContext;
 
-            // Create an instance of the UpdateView
             RoomUpdateView updateView = new RoomUpdateView();
+            updateView.DataContext = room;
 
-            // Set the DataContext of the UpdateView to the selected Room
-            updateView.DataContext = Room;
-
-            // Show the UpdateView as a popup window
             Popup popup = new Popup
             {
                 Child = updateView,
@@ -70,24 +76,28 @@ namespace WpfApp.MVVM.View
                 IsOpen = true
             };
         }
+
+        /// <summary>
+        /// Deletes the selected room from the database.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            // Get the selected Room object from the ListBox
             var button = (Button)sender;
-            var Room = (Room)button.DataContext;
+            var room = (Room)button.DataContext;
 
-            // Prompt the user for confirmation
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButton.YesNo);
 
             if (result == MessageBoxResult.Yes)
             {
                 using (var dbContext = new ApplicationDbContext())
                 {
-                    dbContext.Rooms.Remove(Room);
+                    dbContext.Rooms.Remove(room);
                     dbContext.SaveChanges();
                 }
             }
         }
-
     }
+
 }

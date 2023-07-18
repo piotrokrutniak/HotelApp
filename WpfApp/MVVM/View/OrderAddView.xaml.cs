@@ -26,7 +26,14 @@ namespace WpfApp.MVVM.View
     /// </summary>
     public partial class OrderAddView : UserControl
     {
+        /// <summary>
+        /// Gets or sets the collection of customers.
+        /// </summary>
         public ObservableCollection<Customer> Customers { get; set; } = new ObservableCollection<Customer>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderAddView"/> class.
+        /// </summary>
         public OrderAddView()
         {
             InitializeComponent();
@@ -39,6 +46,11 @@ namespace WpfApp.MVVM.View
             DataContext = this;
         }
 
+        /// <summary>
+        /// Handles the click event of the Discard button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event data.</param>
         private void Discard(object sender, RoutedEventArgs e)
         {
             // Close the OrderUpdateView popup
@@ -47,8 +59,13 @@ namespace WpfApp.MVVM.View
             {
                 popup.IsOpen = false;
             }
-
         }
+
+        /// <summary>
+        /// Handles the click event of the Add button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event data.</param>
         private void Add(object sender, RoutedEventArgs e)
         {
             Order Order = new()
@@ -69,11 +86,17 @@ namespace WpfApp.MVVM.View
             }
         }
 
+        /// <summary>
+        /// Validates the order.
+        /// </summary>
+        /// <param name="Order">The order to validate.</param>
+        /// <returns><c>true</c> if the order is valid; otherwise, <c>false</c>.</returns>
         private bool ValidateOrder(Order Order)
         {
             bool customerId = Order.CustomerId > 0;
-            
+
             return customerId;
         }
     }
+
 }

@@ -19,25 +19,37 @@ using System.Windows.Shapes;
 namespace WpfApp.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for CustomerUpdateView.xaml
+    /// Represents the view for updating customer information.
     /// </summary>
     public partial class CustomerUpdateView : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomerUpdateView"/> class.
+        /// </summary>
         public CustomerUpdateView()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Discards any changes made and closes the CustomerUpdateView popup.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void Discard(object sender, RoutedEventArgs e)
         {
-            // Close the CustomerUpdateView popup
             var popup = this.Parent as Popup;
             if (popup != null)
             {
                 popup.IsOpen = false;
             }
-
         }
+
+        /// <summary>
+        /// Saves the changes made to the customer and closes the CustomerUpdateView popup.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void Save(object sender, RoutedEventArgs e)
         {
             var customer = DataContext as Customer;
@@ -50,9 +62,6 @@ namespace WpfApp.MVVM.View
 
             Discard(sender, e);
         }
-
-
-
-
     }
+
 }

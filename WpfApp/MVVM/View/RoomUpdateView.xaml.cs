@@ -19,18 +19,25 @@ using System.Windows.Shapes;
 namespace WpfApp.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for RoomUpdateView.xaml
+    /// Represents a user control for updating a room.
     /// </summary>
     public partial class RoomUpdateView : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RoomUpdateView"/> class.
+        /// </summary>
         public RoomUpdateView()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Closes the RoomUpdateView popup.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void Discard(object sender, RoutedEventArgs e)
         {
-            // Close the RoomUpdateView popup
             var popup = this.Parent as Popup;
             if (popup != null)
             {
@@ -38,6 +45,12 @@ namespace WpfApp.MVVM.View
             }
 
         }
+
+        /// <summary>
+        /// Updates the room information and saves the changes to the database.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void Save(object sender, RoutedEventArgs e)
         {
             var room = DataContext as Room;
@@ -51,9 +64,6 @@ namespace WpfApp.MVVM.View
 
             Discard(sender, e);
         }
-
-
-
-
     }
+
 }

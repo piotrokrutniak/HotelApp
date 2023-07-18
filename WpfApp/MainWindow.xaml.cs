@@ -22,16 +22,19 @@ namespace WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Initializes a new instance of the MainWindow class.
+        /// </summary>
         public MainWindow()
         {
             ApplicationDbContext context = new();
 
-            if(!context.Customers.Any())
+            if (!context.Customers.Any())
             {
                 SeedDefaultCustomers.Seed(context);
             }
 
-            if(!context.Rooms.Any())
+            if (!context.Rooms.Any())
             {
                 SeedDefaultRooms.Seed(context);
             }
@@ -40,7 +43,6 @@ namespace WpfApp
             {
                 SeedDefaultOrders.Seed(context);
             }
-
 
             InitializeComponent();
         }

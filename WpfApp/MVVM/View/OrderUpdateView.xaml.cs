@@ -20,13 +20,30 @@ using WpfApp.MVVM.ViewModel;
 namespace WpfApp.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for OrderUpdateView.xaml
+    /// Represents a user control for updating an order.
     /// </summary>
     public partial class OrderUpdateView : UserControl
     {
-        List<Booking> Bookings;
+        /// <summary>
+        /// Gets or sets the list of bookings.
+        /// </summary>
+        public List<Booking> Bookings;
+
+        /// <summary>
+        /// Gets or sets the order ID.
+        /// </summary>
         public int OrderId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the customer ID.
+        /// </summary>
         public int CustomerId { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderUpdateView"/> class.
+        /// </summary>
+        /// <param name="bookings">The list of bookings.</param>
+        /// <param name="order">The order object.</param>
         public OrderUpdateView(List<Booking> bookings, Order order)
         {
             InitializeComponent();
@@ -36,16 +53,25 @@ namespace WpfApp.MVVM.View
             CustomerId = order.CustomerId;
         }
 
+        /// <summary>
+        /// Closes the OrderUpdateView popup.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void Discard(object sender, RoutedEventArgs e)
         {
-            // Close the OrderUpdateView popup
             var popup = this.Parent as Popup;
             if (popup != null)
             {
                 popup.IsOpen = false;
             }
-
         }
+
+        /// <summary>
+        /// Updates the total price of the order and saves the changes to the database.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void Save(object sender, RoutedEventArgs e)
         {
             var order = DataContext as Order;
@@ -60,14 +86,16 @@ namespace WpfApp.MVVM.View
             Discard(sender, e);
         }
 
+        /// <summary>
+        /// Creates an instance of the BookingAddView and shows it as a popup window.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            // Create an instance of the UpdateView
             BookingAddView updateView = new BookingAddView(OrderId, CustomerId);
             var parentWindow = Window.GetWindow(this);
 
-
-            // Show the UpdateView as a popup window
             Popup popup = new Popup
             {
                 Child = updateView,
@@ -79,19 +107,19 @@ namespace WpfApp.MVVM.View
             };
         }
 
+        /// <summary>
+        /// Creates an instance of the CustomerUpdateView and shows it as a popup window.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            // Get the selected Customer object from the ListBox
             var button = (Button)sender;
             var customer = (Customer)button.DataContext;
 
-            // Create an instance of the UpdateView
             CustomerUpdateView updateView = new CustomerUpdateView();
-
-            // Set the DataContext of the UpdateView to the selected Customer
             updateView.DataContext = customer;
 
-            // Show the UpdateView as a popup window
             Popup popup = new Popup
             {
                 Child = updateView,
@@ -102,13 +130,17 @@ namespace WpfApp.MVVM.View
                 IsOpen = true
             };
         }
+
+        /// <summary>
+        /// Deletes the selected customer from the database.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            // Get the selected Customer object from the ListBox
             var button = (Button)sender;
             var customer = (Customer)button.DataContext;
 
-            // Prompt the user for confirmation
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButton.YesNo);
 
             if (result == MessageBoxResult.Yes)
@@ -120,7 +152,6 @@ namespace WpfApp.MVVM.View
                 }
             }
         }
-
-
     }
+
 }

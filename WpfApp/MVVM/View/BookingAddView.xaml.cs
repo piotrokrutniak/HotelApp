@@ -23,16 +23,22 @@ using System.Windows.Shapes;
 namespace WpfApp.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for BookingUpdateView.xaml
+    /// Represents a partial class for the BookingAddView user control.
     /// </summary>
     public partial class BookingAddView : UserControl
     {
+        /// <summary>
+        /// Gets or sets the collection of rooms.
+        /// </summary>
         public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
 
         private string _selectedRoomCost;
         private int _orderId { get; set; }
         private int _customerId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the selected room cost.
+        /// </summary>
         public string SelectedRoomCost
         {
             get { return _selectedRoomCost; }
@@ -42,6 +48,12 @@ namespace WpfApp.MVVM.View
                 OnPropertyChanged(nameof(SelectedRoomCost));
             }
         }
+
+        /// <summary>
+        /// Initializes a new instance of the BookingAddView class.
+        /// </summary>
+        /// <param name="orderId">The order ID.</param>
+        /// <param name="customerId">The customer ID.</param>
         public BookingAddView(int orderId, int customerId)
         {
             InitializeComponent();
@@ -56,6 +68,11 @@ namespace WpfApp.MVVM.View
             DataContext = this;
         }
 
+        /// <summary>
+        /// Event handler for the Discard button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void Discard(object sender, RoutedEventArgs e)
         {
             // Close the BookingUpdateView popup
@@ -64,8 +81,13 @@ namespace WpfApp.MVVM.View
             {
                 popup.IsOpen = false;
             }
-
         }
+
+        /// <summary>
+        /// Event handler for the Add button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void Add(object sender, RoutedEventArgs e)
         {
             Booking booking = new()
@@ -93,24 +115,34 @@ namespace WpfApp.MVVM.View
             }
         }
 
+        /// <summary>
+        /// Validates a booking.
+        /// </summary>
+        /// <param name="booking">The booking to validate.</param>
+        /// <returns>True if the booking is valid, false otherwise.</returns>
         private bool ValidateBooking(Booking booking)
         {
             double span = (booking.CheckOut - booking.CheckIn).TotalDays;
 
-
             bool checkIn = span < 365;
-
             bool checkOut = span >= 1;
-
 
             return checkIn && checkOut;
         }
 
+        /// <summary>
+        /// Raises the PropertyChanged event for the specified property name.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Event that is raised when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
     }
+
 }

@@ -19,15 +19,23 @@ using System.Windows.Shapes;
 namespace WpfApp.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for CustomerUpdateView.xaml
+    /// Represents a partial class for the CustomerAddView user control.
     /// </summary>
     public partial class CustomerAddView : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the CustomerAddView class.
+        /// </summary>
         public CustomerAddView()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Event handler for the Discard button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void Discard(object sender, RoutedEventArgs e)
         {
             // Close the CustomerUpdateView popup
@@ -36,8 +44,13 @@ namespace WpfApp.MVVM.View
             {
                 popup.IsOpen = false;
             }
-
         }
+
+        /// <summary>
+        /// Event handler for the Add button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void Add(object sender, RoutedEventArgs e)
         {
             var firstName = FirstNameTextBox.Text;
@@ -58,4 +71,5 @@ namespace WpfApp.MVVM.View
             }
         }
     }
+
 }
