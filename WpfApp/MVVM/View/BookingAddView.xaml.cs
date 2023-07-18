@@ -72,8 +72,8 @@ namespace WpfApp.MVVM.View
             {
                 OrderId = _orderId,
                 CustomerId = _customerId,
-                CheckIn = DateTime.Parse(CheckInTextBox.Text),
-                CheckOut = DateTime.Parse(CheckOutTextBox.Text),
+                CheckIn = DateTime.Parse(CheckInTextBox.Text.IsNullOrEmpty() ? DateTime.Now.ToString() : CheckInTextBox.Text),
+                CheckOut = DateTime.Parse(CheckOutTextBox.Text.IsNullOrEmpty() ? DateTime.Now.ToString() : CheckOutTextBox.Text),
                 RoomId = int.Parse(ComboBoxStandard.SelectedValue.ToString())
             };
 
@@ -86,6 +86,10 @@ namespace WpfApp.MVVM.View
                 }
 
                 Discard(sender, e);
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Booking validation failed. Please check the check-in and check-out dates.", "Validation Error", MessageBoxButton.OK);
             }
         }
 

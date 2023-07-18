@@ -1,4 +1,5 @@
 ﻿using Persistence.Context;
+using Persistence.Seeds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,24 @@ namespace WpfApp
     {
         public MainWindow()
         {
+            ApplicationDbContext context = new();
+
+            if(!context.Customers.Any())
+            {
+                SeedDefaultCustomers.Seed(context);
+            }
+
+            if(!context.Rooms.Any())
+            {
+                SeedDefaultRooms.Seed(context);
+            }
+
+            if (!context.Orders.Any())
+            {
+                SeedDefaultOrders.Seed(context);
+            }
+
+
             InitializeComponent();
         }
     }

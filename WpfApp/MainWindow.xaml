@@ -35,19 +35,12 @@
                    FontSize="22"/>
 
             <StackPanel Grid.Row="1">
-                <RadioButton Content="Room Availability"
-                             Height="50"
-                             Foreground="White"
-                             VerticalAlignment="Center"
-                             FontSize="14"
-                             IsChecked="True"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding HomeViewCommand}"/>
                 <RadioButton Content="Customers"
                              Height="50"
                              Foreground="White"
                              VerticalAlignment="Center"
                              FontSize="14"
+                             IsChecked="True"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding CustomerViewCommand}"/>
                 <RadioButton Content="Rooms"

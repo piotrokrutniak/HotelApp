@@ -37,7 +37,7 @@ namespace WpfApp.MVVM.ViewModel
             RoomVM = new RoomViewModel();
             OrderVM = new OrderViewModel();
 
-            CurrentView = HomeVM;
+            CurrentView = CustomerVM;
 
             HomeViewCommand = new RelayCommand(x =>
             {

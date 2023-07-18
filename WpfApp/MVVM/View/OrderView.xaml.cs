@@ -36,6 +36,7 @@ namespace WpfApp.MVVM.View
         {
             // Create an instance of the UpdateView
             OrderAddView updateView = new OrderAddView();
+            var parentWindow = Window.GetWindow(this);
 
             // Show the UpdateView as a popup window
             Popup popup = new Popup
@@ -43,7 +44,7 @@ namespace WpfApp.MVVM.View
                 Child = updateView,
                 Width = updateView.Width,
                 Height = updateView.Height,
-                PlacementTarget = this,
+                PlacementTarget = parentWindow,
                 Placement = PlacementMode.Center,
                 IsOpen = true
             };
